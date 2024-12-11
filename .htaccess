@@ -1,0 +1,31 @@
+# Enable rewrite engine
+RewriteEngine On
+
+# Redirect to HTTPS (optional, if SSL is enabled)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Rewrite for Next.js routing
+# Allow direct access to files in the public folder
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Redirect all other requests to Next.js
+RewriteRule ^ index.html [L]
+
+# Set caching for static assets (optional)
+<FilesMatch "\.(js|css|png|jpg|jpeg|gif|svg|ico|woff|woff2|ttf|otf|eot)$">
+    Header set Cache-Control "max-age=31536000, public"
+</FilesMatch>
+
+# Prevent access to sensitive files
+<Files .env>
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+<FilesMatch "^\.(htaccess|git|svn|hg|env)">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
