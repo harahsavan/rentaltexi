@@ -4,7 +4,6 @@ import distanceSlice from "../slice/DistanceSlice"
 import RagisterData from "../slice/RagisterData"
 import loginSlice from "../slice/LoginSlice"
 import AdminSlice from "../slice/AdminSlice"
-// import CarSlice from "../slice/CarSlice"
 
 
 
@@ -14,7 +13,6 @@ const rootReducer = combineReducers({
   ragister: RagisterData,
   login : loginSlice,
   AdminSlice: AdminSlice,
-  // car: CarSlice,
 });
 
 
